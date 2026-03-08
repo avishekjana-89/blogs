@@ -1,0 +1,81 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  pubDate: string;
+  slug: string;
+  tags?: string[];
+}
+
+const { title, description, pubDate, slug, tags } = Astro.props;
+const formattedDate = new Date(pubDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<a href={`/blog/${slug}`} class="post-card">
+  <article>
+    <time datetime={pubDate}>{formattedDate}</time>
+    <h3>{title}</h3>
+    <p>{description}</p>
+    {tags && (
+      <div class="tags">
+        {tags.map((tag: string) => (
+          <span class="tag">{tag}</span>
+        ))}
+      </div>
+    )}
+  </article>
+</a>
+
+<style>
+  .post-card {
+    display: block;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: border-color 0.2s, transform 0.2s;
+    color: var(--text);
+  }
+
+  .post-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+
+  time {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  h3 {
+    margin: 0.4rem 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+  }
+
+  .tag {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+  }
+</style>

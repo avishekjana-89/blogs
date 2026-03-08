@@ -1,0 +1,86 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+    pubDate: string;
+    tags?: string[];
+  };
+}
+
+const { frontmatter } = Astro.props;
+const formattedDate = new Date(frontmatter.pubDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={`${frontmatter.title} | Blog`} description={frontmatter.description}>
+  <Header />
+  <main class="post-page">
+    <article class="prose">
+      <header class="post-header">
+        <time datetime={frontmatter.pubDate}>{formattedDate}</time>
+        <h1>{frontmatter.title}</h1>
+        {frontmatter.description && <p class="description">{frontmatter.description}</p>}
+        {frontmatter.tags && (
+          <div class="tags">
+            {frontmatter.tags.map((tag: string) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </header>
+      <hr />
+      <slot />
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .post-page {
+    padding: 2rem 1.5rem;
+    flex: 1;
+  }
+
+  .post-header {
+    margin-bottom: 1rem;
+  }
+
+  .post-header time {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .post-header h1 {
+    margin: 0.5rem 0;
+    font-size: 2.2rem;
+  }
+
+  .description {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+  }
+
+  .tag {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+  }
+</style>

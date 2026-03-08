@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="About | Blog" description="About me">
+  <Header />
+  <main class="about">
+    <div class="prose">
+      <h1>About Me</h1>
+      <p>
+        Hi, I'm Avishek! I'm a Lead SDET who loves to build things that help QA.
+      </p>
+      <p>
+        This blog is my space to share what I learn, document projects I'm
+        working on, and think through ideas by writing about them.
+      </p>
+
+      <h2>Get in touch</h2>
+      <p>
+        You can find me on <a href="https://github.com/avishekjana-89">GitHub</a>.
+        Feel free to reach out!
+      </p>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .about {
+    padding: 2rem 1.5rem;
+    flex: 1;
+  }
+</style>
