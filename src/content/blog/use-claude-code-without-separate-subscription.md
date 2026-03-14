@@ -9,6 +9,10 @@ Claude Code is Anthropic's powerful CLI tool for agentic coding — but it comes
 
 This guide covers both options step by step.
 
+> [!NOTE]
+> **A quick heads-up before you get started.**
+> This approach works well in practice, but it's worth knowing that GitHub Copilot and Google Antigravity subscriptions are intended for use within their own ecosystems. Routing a third-party tool like Claude Code through them isn't an officially supported use case, so it technically sits in a policy grey area. In rare cases, accounts have been temporarily suspended — just go in with eyes open and be aware of the risk.
+
 ---
 
 ## Prerequisites
